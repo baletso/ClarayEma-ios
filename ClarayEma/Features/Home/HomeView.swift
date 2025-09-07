@@ -8,50 +8,44 @@ import SwiftUI
 
 struct HomeView: View {
     private let recipes: [Recipe] = [
-        .init(title: "A la copa",
-              subtitle: "Clara cuajada – yEma líquida, ideal para comer en taza con cuchara.",
-              timeMinutes: 5,
-              yolkColor: Theme.yolkLiquid),
-        .init(title: "Semiduros",
-              subtitle: "Clara firme y yEma cremosa, perfecto para sándwiches o ensaladas.",
-              timeMinutes: 10,
-              yolkColor: Theme.yolkSoft),
-        .init(title: "Duros",
-              subtitle: "Clara y yEma sólidas, para picar o rellenar.",
-              timeMinutes: 12,
-              yolkColor: Theme.yolkHard)
+            .init(title: "A la copa",
+                  subtitle: "Clara cuajada – yEma líquida, ideal para comer en taza con cuchara.",
+                  timeMinutes: 5,
+                  tone: .liquid),   // <-- usamos YolkTone
+            .init(title: "Semiduros",
+                  subtitle: "Clara firme y yEma cremosa, perfecto para sándwiches o ensaladas.",
+                  timeMinutes: 10,
+                  tone: .soft),
+            .init(title: "Duros",
+                  subtitle: "Clara y yEma sólidas, para picar o rellenar.",
+                  timeMinutes: 12,
+                  tone: .hard)
     ]
-
+    
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: Spacing.xl) {
-
-                // Header
-                Text("Elige una receta")
+            VStack(alignment: .leading, spacing: 24) {
+                
+                Text("Elige una receta para preparar tus huevos")
                     .font(AppTypography.h1)
                     .foregroundStyle(Theme.textPrimary)
-                    .padding(.top, Spacing.xl)
-
-                // Cards
-                VStack(spacing: Spacing.lg) {
-                    ForEach(recipes) { r in
-                        RecipeCard(
-                            title: r.title,
-                            subtitle: r.subtitle,
-                            timeText: "\(r.timeMinutes) min",
-                            yolkColor: r.yolkColor
-                        ) {
-                            // Navegación a Timer (lo conectaremos luego)
-                            print("Tap en \(r.title)")
-                        }
+                    .padding(.top, 24)
+                    .padding(.horizontal, 20) // <- solo el título, está OK
+                
+                ForEach(recipes) { r in
+                    RecipeCard(
+                        title: r.title,
+                        subtitle: r.subtitle,
+                        timeText: "\(r.timeMinutes) min",
+                        yolkTone: r.tone
+                    ) {
+                        // navegación...
                     }
                 }
+                
+                Spacer(minLength: 24)
             }
-            .padding(.horizontal, Spacing.xl)
-            .padding(.bottom, Spacing.xl)
         }
         .background(Theme.surface.ignoresSafeArea())
-        .navigationTitle("") // sin título del NavBar
-        .navigationBarHidden(true)
     }
 }

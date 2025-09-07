@@ -11,5 +11,5 @@ struct Recipe: Identifiable {
     let title: String
     let subtitle: String
     let timeMinutes: Int
-    let yolkColor: Color
+    let tone: YolkTone  
 }

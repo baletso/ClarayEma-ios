@@ -6,97 +6,78 @@
 //
 import SwiftUI
 
+// Constantes del componente (puedes mover a tus UIConstants si quieres)
+private enum CardUI {
+    static let screenPadding: CGFloat   = 20    // borde pantalla
+    static let innerPadding: CGFloat    = 16    // padding interno card
+    static let itemSpacing: CGFloat     = 16    // separación entre yema / texto / chevron
+    static let yolkSize: CGFloat        = 64
+    static let chevronWidth: CGFloat    = 24
+    static let cornerRadius: CGFloat    = 20
+    static let strokeWidth: CGFloat     = 2
+}
+
 struct RecipeCard: View {
     let title: String
     let subtitle: String
-    let timeText: String
-    let yolkColor: Color
-    var onTap: () -> Void = {}
+    let timeText: String       // ej. "5 min"
+    let yolkTone: YolkTone
+    var onTap: () -> Void
 
     var body: some View {
         Button(action: onTap) {
-            HStack(spacing: Spacing.lg) {
+            // Caja
+            HStack(spacing: CardUI.itemSpacing) {
 
-                // “yema” circular (si luego usas imagen, reemplaza este ZStack)
-                ZStack {
-                    Circle()
-                        .fill(yolkColor)
-                        .frame(width: 54, height: 54)
-                        .shadow(color: Shadow.soft, radius: 6, y: 3)
+                // 1) Yema (tamaño fijo)
+                YolkBadge(kind: .color(yolkTone.color), size: CardUI.yolkSize)
+                    .fixedSize()
 
-                    // pequeño brillo (opcional, para acercarse a tu Figma)
-                    Circle()
-                        .fill(.white.opacity(0.25))
-                        .frame(width: 22, height: 22)
-                        .offset(x: 10, y: -10)
-                }
+                // 2) Texto ocupa el espacio restante (alto flexible)
+                VStack(alignment: .leading, spacing: 8) {
 
-                VStack(alignment: .leading, spacing: 6) {
-                    // Título + tiempo
-                    HStack(alignment: .firstTextBaseline, spacing: 6) {
-                        Text(title)
-                            .font(AppTypography.h2)
-                            .foregroundStyle(Theme.textPrimary)
+                    // Título + tiempo en una misma línea
+                    Text("\(title): \(timeText)")
+                        .font(AppTypography.h2)
+                        .foregroundStyle(Theme.textPrimary)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
 
-                        Text("· \(timeText)")
-                            .font(AppTypography.note)
-                            .foregroundStyle(Theme.textPrimary.opacity(0.7))
-                    }
-
+                    // Descripción (sin corte, alto flexible)
                     Text(subtitle)
                         .font(AppTypography.body)
                         .foregroundStyle(Theme.textPrimary)
-                        .lineLimit(2)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading) // <- se expande entre yema y chevron
 
-                Spacer(minLength: 8)
-
-                // Chevron
+                // 3) Chevron (tamaño fijo)
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(Theme.textPrimary.opacity(0.6))
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(Theme.textPrimary.opacity(0.65))
+                    .frame(width: CardUI.chevronWidth, alignment: .trailing)
             }
-            .padding(Spacing.lg)
+            .padding(CardUI.innerPadding)
             .background(
-                RoundedRectangle(cornerRadius: Radius.lg, style: .continuous)
+                RoundedRectangle(cornerRadius: CardUI.cornerRadius)
                     .fill(Color.white)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: Radius.lg, style: .continuous)
-                    .stroke(Theme.ctaStroke.opacity(0.4), lineWidth: 1)
+                // Borde 2 pt con “inset” para calzar con Figma
+                RoundedRectangle(cornerRadius: CardUI.cornerRadius)
+                    .inset(by: 1)
+                    .stroke(Theme.textPrimary, lineWidth: CardUI.strokeWidth)
             )
-            .shadow(color: Shadow.soft, radius: 8, y: 4)
+            .clipShape(RoundedRectangle(cornerRadius: CardUI.cornerRadius))
+            .shadow(color: .black.opacity(0.06), radius: 12, y: 6)
+            .contentShape(RoundedRectangle(cornerRadius: CardUI.cornerRadius))
         }
-        .buttonStyle(.plain) // no heredar tint de Button
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity, alignment: .center) // que la caja crezca a lo ancho
+        .padding(.horizontal, CardUI.screenPadding)     // 20 pt desde los bordes de pantalla
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(title), \(timeText). \(subtitle)")
+        .accessibilityAddTraits(.isButton)
     }
-}
-
-// MARK: - Preview
-#Preview("RecipeCard") {
-    VStack(spacing: 16) {
-        RecipeCard(
-            title: "A la copa",
-            subtitle: "Clara cuajada – yEma líquida, ideal para comer en taza con cuchara.",
-            timeText: "5 min",
-            yolkColor: Theme.yolkLiquid
-        )
-
-        RecipeCard(
-            title: "Semiduros",
-            subtitle: "Clara firme y yEma cremosa, perfecto para sándwiches o ensaladas.",
-            timeText: "10 min",
-            yolkColor: Theme.yolkSoft
-        )
-
-        RecipeCard(
-            title: "Duros",
-            subtitle: "Clara y yEma sólidas, para picar o rellenar.",
-            timeText: "12 min",
-            yolkColor: Theme.yolkHard
-        )
-    }
-    .padding(Spacing.xl)
-    .background(Theme.surface)
 }
