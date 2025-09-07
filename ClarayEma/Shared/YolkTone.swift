@@ -6,10 +6,8 @@
 //
 import SwiftUI
 
-enum YolkTone {
-    case liquid   // naranja intenso
-    case soft     // anaranjado suave
-    case hard     // amarillo
+enum YolkTone: Hashable {
+    case liquid, soft, hard
 
     var color: Color {
         switch self {

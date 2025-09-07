@@ -6,10 +6,10 @@
 //
 import SwiftUI
 
-struct Recipe: Identifiable {
+struct Recipe: Identifiable, Hashable {
     let id = UUID()
     let title: String
     let subtitle: String
     let timeMinutes: Int
-    let tone: YolkTone  
+    let tone: YolkTone
 }

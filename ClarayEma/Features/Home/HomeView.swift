@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var selectedRecipe: Recipe?
+    
     private let recipes: [Recipe] = [
         .init(title: "A la copa",
               subtitle: "Clara cuajada – yEma líquida, ideal para comer en taza con cuchara.",
@@ -24,10 +26,8 @@ struct HomeView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // HEADER
             AppHeader()
-
-            // CONTENIDO
+            
             ScrollView {
                 ContentContainer(maxWidth: 600, horizontalPadding: 20, topSpacing: 24) {
                     VStack(alignment: .leading, spacing: 24) {
@@ -43,7 +43,7 @@ struct HomeView: View {
                                     timeText: "\(r.timeMinutes) min",
                                     yolkTone: r.tone
                                 ) {
-                                    // Navegación a Timer (lo haremos después)
+                                    selectedRecipe = r
                                 }
                             }
                         }
@@ -53,5 +53,13 @@ struct HomeView: View {
         }
         .background(Theme.surface.ignoresSafeArea())
         .navigationBarHidden(true)
+        .navigationDestination(item: $selectedRecipe) { recipe in
+                    // Adaptador: pasamos exactamente lo que TimerView pide hoy
+                    TimerView(
+                        recipeName: recipe.title,
+                        minutes: recipe.timeMinutes,
+                        color: recipe.tone.color
+                    )
+                }
     }
 }
