@@ -12,6 +12,27 @@ This project follows a **learning-by-doing approach**, so commits are grouped in
 - Recipe tips integration.
 
 ---
+## [0.2.0] - 2025-09-07
+### Added
+- Created reusable `AppHeader` component with logo, responsive across iPhone and iPad.
+- Implemented full-width `RecipeCard` component:
+  - Yolk badge as vector with flexible tones.
+  - Title + cooking time in a single line.
+  - Description text grows dynamically with content.
+  - Chevron aligned consistently with text block.
+- Structured `HomeView` to display recipes using the new reusable components.
+
+### Changed
+- Improved spacing and layout to better reflect original Figma design.
+
+---
+
+## [0.1.0] - 2025-09-06
+### Added
+- Initial project bootstrap with SwiftUI architecture.
+- Theme system with design tokens (colors, typography).
+- Custom font integration (Fredoka family).
+- Basic navigation structure and initial placeholder views.
 
 ## [0.1.0] - 2025-09-07
 ### Added
