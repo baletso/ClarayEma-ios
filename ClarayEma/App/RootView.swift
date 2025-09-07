@@ -8,18 +8,24 @@ import SwiftUI
 
 struct RootView: View {
     @State private var showHome = false
-    
+
     var body: some View {
         NavigationStack {
-                    Group {
-                        if showHome {
-                            HomeView()
-                        } else {
-                            LaunchPageView(onContinue: { showHome = true })
+            ZStack {
+                Theme.surface.ignoresSafeArea()
+
+                if showHome {
+                    HomeView()
+                } else {
+                    LaunchPageView {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            showHome = true
                         }
                     }
-                    .background(Theme.surface.ignoresSafeArea())
                 }
+            }
+        }
     }
 }
+
 

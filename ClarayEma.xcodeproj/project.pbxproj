@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		800C72A62E6CAACD0052D557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 800C72A52E6CAACD0052D557 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		800C72692E6C97730052D557 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,11 +31,25 @@
 		800C725B2E6C97720052D557 /* ClarayEma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClarayEma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		800C72682E6C97730052D557 /* ClarayEmaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClarayEmaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		800C72722E6C97730052D557 /* ClarayEmaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClarayEmaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		800C72A52E6CAACD0052D557 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		800C72B72E6CF1320052D557 /* Exceptions for "ClarayEma" folder in "ClarayEma" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 800C725A2E6C97720052D557 /* ClarayEma */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		800C725D2E6C97720052D557 /* ClarayEma */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				800C72B72E6CF1320052D557 /* Exceptions for "ClarayEma" folder in "ClarayEma" target */,
+			);
 			path = ClarayEma;
 			sourceTree = "<group>";
 		};
@@ -75,6 +93,7 @@
 		800C72522E6C97720052D557 = {
 			isa = PBXGroup;
 			children = (
+				800C72A52E6CAACD0052D557 /* LaunchScreen.storyboard */,
 				800C725D2E6C97720052D557 /* ClarayEma */,
 				800C726B2E6C97730052D557 /* ClarayEmaTests */,
 				800C72752E6C97730052D557 /* ClarayEmaUITests */,
@@ -212,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				800C72A62E6CAACD0052D557 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,9 +420,11 @@
 				DEVELOPMENT_TEAM = UU3P7HN8UJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ClarayEma/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -428,9 +450,11 @@
 				DEVELOPMENT_TEAM = UU3P7HN8UJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ClarayEma/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-/// Design tokens de color (Light mode).
 enum Theme {
     // Base
     static let surface      = Color(hex: "#7BCAFF")  // Agua

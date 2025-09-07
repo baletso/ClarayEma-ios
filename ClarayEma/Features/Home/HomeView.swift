@@ -7,34 +7,51 @@
 import SwiftUI
 
 struct HomeView: View {
+    private let recipes: [Recipe] = [
+        .init(title: "A la copa",
+              subtitle: "Clara cuajada – yEma líquida, ideal para comer en taza con cuchara.",
+              timeMinutes: 5,
+              yolkColor: Theme.yolkLiquid),
+        .init(title: "Semiduros",
+              subtitle: "Clara firme y yEma cremosa, perfecto para sándwiches o ensaladas.",
+              timeMinutes: 10,
+              yolkColor: Theme.yolkSoft),
+        .init(title: "Duros",
+              subtitle: "Clara y yEma sólidas, para picar o rellenar.",
+              timeMinutes: 12,
+              yolkColor: Theme.yolkHard)
+    ]
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Elige una receta")
-                .font(.largeTitle).bold()
-                .foregroundColor(Theme.textPrimary)
-                .padding(.horizontal, 20)
-                .padding(.top, 24)
+        ScrollView {
+            VStack(alignment: .leading, spacing: Spacing.xl) {
 
-            // Por ahora, tres botones “tontos” que navegan al Timer
-            NavigationLink("A la copa — 5 min") {
-                TimerView(recipeName: "A la copa", minutes: 5, color: Theme.yolkLiquid)
+                // Header
+                Text("Elige una receta")
+                    .font(AppTypography.h1)
+                    .foregroundStyle(Theme.textPrimary)
+                    .padding(.top, Spacing.xl)
+
+                // Cards
+                VStack(spacing: Spacing.lg) {
+                    ForEach(recipes) { r in
+                        RecipeCard(
+                            title: r.title,
+                            subtitle: r.subtitle,
+                            timeText: "\(r.timeMinutes) min",
+                            yolkColor: r.yolkColor
+                        ) {
+                            // Navegación a Timer (lo conectaremos luego)
+                            print("Tap en \(r.title)")
+                        }
+                    }
+                }
             }
-            .buttonStyle(.borderedProminent)
-
-            NavigationLink("Semiduros — 10 min") {
-                TimerView(recipeName: "Semiduros", minutes: 10, color: Theme.yolkSoft)
-            }
-            .buttonStyle(.borderedProminent)
-
-            NavigationLink("Duros — 12 min") {
-                TimerView(recipeName: "Duros", minutes: 12, color: Theme.yolkHard)
-            }
-            .buttonStyle(.borderedProminent)
-
-            Spacer()
+            .padding(.horizontal, Spacing.xl)
+            .padding(.bottom, Spacing.xl)
         }
-        .padding(.horizontal, 20)
         .background(Theme.surface.ignoresSafeArea())
-        .tint(Theme.textPrimary) // color del texto de los botones
+        .navigationTitle("") // sin título del NavBar
+        .navigationBarHidden(true)
     }
 }

@@ -6,50 +6,31 @@
 //
 import SwiftUI
 
-
 struct LaunchPageView: View {
-    var onContinue: () -> Void = {}
+    var onContinue: () -> Void
+    var delay: TimeInterval = 1.2
 
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
+        ZStack {
+            Theme.surface.ignoresSafeArea()
 
-            // Placeholder del logo (luego pondremos el asset real)
-            ZStack {
-                Circle().fill(Theme.shell).frame(width: 180, height: 180)
-                Text("🥚")
-                    .font(.system(size: 72))
+            VStack {
+                Spacer(minLength: 40)
+
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 180, height: 180)
+                    .accessibilityLabel("Clara yEma")
+
+                Spacer()
             }
-
-            VStack(spacing: 8) {
-                Text("Clara yEma")
-                    .font(.largeTitle).bold()
-                    .foregroundColor(Theme.textPrimary)
-                Text("Prepara tus huevos favoritos con precisión")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Theme.textPrimary.opacity(0.8))
-            }
-            .padding(.horizontal, 32)
-
-            Spacer()
-
-            Button(action: onContinue) {
-                Text("Empezar")
-                    .font(.title3).bold()
-                    .foregroundColor(Theme.textPrimary)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(Theme.cta)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(Theme.ctaStroke, lineWidth: 3)
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .padding(.horizontal, 24)
-            }
-
-            Spacer(minLength: 32)
+            .padding(.horizontal, 24)
         }
-        .background(Theme.surface.ignoresSafeArea())
+        .statusBarHidden(true)
+        .task {
+            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+            onContinue()
+        }
     }
 }
