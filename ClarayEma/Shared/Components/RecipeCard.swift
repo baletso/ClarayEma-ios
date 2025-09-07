@@ -75,7 +75,6 @@ struct RecipeCard: View {
         }
         .buttonStyle(.plain)
         .frame(maxWidth: .infinity, alignment: .center) // que la caja crezca a lo ancho
-        .padding(.horizontal, CardUI.screenPadding)     // 20 pt desde los bordes de pantalla
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(title), \(timeText). \(subtitle)")
         .accessibilityAddTraits(.isButton)
